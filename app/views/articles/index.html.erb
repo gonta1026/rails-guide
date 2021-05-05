@@ -3,13 +3,14 @@
 Our blog has <%= Article.public_count("public") %> articles and counting!
 
 <ul>
-  <% @articles.each do |article| %>
-    <% unless article.archived? %>
-      <li>
-        <%= link_to article.title, article %>
-      </li>
+    <% @articles.each do |article| %>
+    <% if !article.archived? && article.is_deleted == false %>
+    <li>
+        <%= article.is_deleted %>
+        <%= link_to article.id, article %>
+    </li>
     <% end %>
-  <% end %>
+    <% end %>
 </ul>
 
 <%= link_to "New Article", new_article_path %>
